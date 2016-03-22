@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +106,7 @@ public class JobseekerDaoImpl implements JobseekerDao {
 	 */
 	public List<Jobseeker> fetchAll() throws Exception {
 		// TODO Auto-generated method stub
-		String sql = "SELECT a.id as jobseeker_id, a.first_name, a.last_name, a.gender, a.pob, a.dob, a.position_id, b.position_name, b.description"
+		String sql = "SELECT a.id as jobseeker_id, a.first_name, a.last_name, a.gender, a.pob, a.dob, a.position_id, a.status, a.created_at, a.updated_at, b.position_name, b.description"
 				+ " FROM jobseeker a"
 				+ " LEFT JOIN position b"
 				+ " ON a.position_id = b.id";
@@ -128,6 +129,16 @@ public class JobseekerDaoImpl implements JobseekerDao {
 				p.setDescription(rs.getString("description"));
 				
 				js.setPosition(p);
+				js.setStatus(rs.getString("status"));
+				
+				Calendar cal = Calendar.getInstance();
+				cal.setTimeInMillis(rs.getTimestamp("created_at").getTime());
+				js.setCreatedAt(cal.getTime());
+				
+				if (rs.getTimestamp("updated_at") != null) {
+					cal.setTimeInMillis(rs.getTimestamp("updated_at").getTime());
+					js.setUpdatedAt(cal.getTime());
+				}
 				
 				return js;
 			}
@@ -139,7 +150,7 @@ public class JobseekerDaoImpl implements JobseekerDao {
 	 */
 	public Jobseeker fetchById(final String id) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = "SELECT a.id as jobseeker_id, a.first_name, a.last_name, a.gender, a.pob, a.dob, a.position_id, b.position_name, b.description"
+		String sql = "SELECT a.id as jobseeker_id, a.first_name, a.last_name, a.gender, a.pob, a.dob, a.position_id, a.status, a.created_at, a.updated_at, b.position_name, b.description"
 				+ " FROM jobseeker a"
 				+ " LEFT JOIN position b"
 				+ " ON a.position_id = b.id"
@@ -173,6 +184,17 @@ public class JobseekerDaoImpl implements JobseekerDao {
 					p.setDescription(rs.getString("description"));
 					
 					js.setPosition(p);
+					js.setStatus(rs.getString("status"));
+					
+					Calendar cal = Calendar.getInstance();
+					cal.setTimeInMillis(rs.getTimestamp("created_at").getTime());
+					js.setCreatedAt(cal.getTime());
+					
+					if (rs.getTimestamp("updated_at") != null) {
+						cal.setTimeInMillis(rs.getTimestamp("updated_at").getTime());
+						js.setUpdatedAt(cal.getTime());
+					}
+					
 				}
 				
 				return js;
