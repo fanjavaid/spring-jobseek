@@ -9,8 +9,9 @@ create table `jobseeker` (
 	`pob` varchar(100) not null,
 	`dob` date not null,
 	`position_id` varchar(150) not null,
+	`status` enum('pending', 'process', 'finish') not null default 'pending',
 	`created_at` timestamp not null,
-	`updated_at` timestamp not null
+	`updated_at` timestamp null
 );
 
 create table `position` (
