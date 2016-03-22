@@ -20,6 +20,9 @@ public class Jobseeker {
 	private String pob;
 	private Date dob;
 	private Position position;
+	private String status;
+	private Date createdAt;
+	private Date updatedAt;
 	
 	public Jobseeker() {
 		super();
@@ -27,7 +30,8 @@ public class Jobseeker {
 	}
 
 	public Jobseeker(String id, String firstName, String lastName,
-			String gender, String pob, Date dob, Position position) {
+			String gender, String pob, Date dob, Position position,
+			String status, Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -36,6 +40,9 @@ public class Jobseeker {
 		this.pob = pob;
 		this.dob = dob;
 		this.position = position;
+		this.status = status;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public String getId() {
@@ -94,11 +101,37 @@ public class Jobseeker {
 		this.position = position;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	@Override
 	public String toString() {
 		return "Jobseeker [id=" + id + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", gender=" + gender + ", pob="
-				+ pob + ", dob=" + dob + ", position=" + position + "]";
+				+ pob + ", dob=" + dob + ", position=" + position + ", status="
+				+ status + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + "]";
 	}
 	
 }
