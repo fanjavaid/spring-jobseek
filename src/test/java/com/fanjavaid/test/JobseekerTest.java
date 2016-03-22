@@ -66,6 +66,7 @@ public class JobseekerTest {
 		js.setGender("F");
 		js.setPob("Tokyo");
 		js.setDob(new SimpleDateFormat("yyyy-MM-dd").parse("1992-08-11"));
+		js.setStatus("process");
 		
 		Position p = positionService.getPositionById("35910510-ef2f-11e5-9ce9-5e5517507c66");
 		js.setPosition(p);
@@ -87,12 +88,13 @@ public class JobseekerTest {
 	
 	@Test
 	public void getJobseekerById() throws Exception {
-		String id = "b4f59076-ef22-11e5-9ce9-5e5517507c66";
+		String id = "a20f5e38-ef22-11e5-9ce9-5e5517507c66";
 		Jobseeker jobseeker = jobseekerService.getJobseekerById(id);
 		
 		Assert.assertNotNull(jobseeker);
 		Assert.assertNotNull(jobseeker.getPosition());
-		Assert.assertEquals("Erika", jobseeker.getFirstName());
+		Assert.assertEquals("John", jobseeker.getFirstName());
 		Assert.assertEquals("277cc5ae-ef2f-11e5-9ce9-5e5517507c66", jobseeker.getPosition().getId());
+		Assert.assertEquals("pending", jobseeker.getStatus());
 	}
 }
